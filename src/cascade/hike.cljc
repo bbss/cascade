@@ -21,6 +21,7 @@
 (defn- map-entry
   [[mk mv]]
   #?(:bb (first {mk mv})
+     :cljd (MapEntry mk mv)
      :clj (clojure.lang.MapEntry/create mk mv)
      :cljs (cljs.core/MapEntry. mk mv nil)))
 
@@ -155,7 +156,8 @@
 ;; => (:x :y (:z {:d 1}))
 
 
-#?(:clj
+#?(:cljd nil
+   :clj
    (defn macroexpand-all
      "Recursively performs all possible macroexpansions in form. Works for very
   nested forms."
